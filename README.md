@@ -1,5 +1,7 @@
 # Drone-Astar
 
+## The Project
+
 A similarly important problem facing the widespread adoption of drones in urban areas, in addition to the robust autonomous controller discussed in the FYP directory, is the drone's ability to navigate a constantly changing urban environment, full of static and dynamic obstacles.
 
 This project resulted in the creation of a MATLAB app as shown below. The front-end code was written in MATLAB's App Designer software, and allows the user to either choose from a selection of pre-defined urban environments or to create an entirely novel situation for the quadcopter to navigate. Once start and target coordinates are inputted, the user can choose how many fixed obstacles (buildings) and moving obstacles (other aircraft) will be included in the simulation. The buildings are modelled as cylinders where height, radius, and (x,y) center position are requested. The moving obstacles are defined as (x,y) center positon, radius, and height above ground. A direction is then selected for all moving obstacles to move in.
@@ -13,9 +15,17 @@ Dynamic A* Quadcopter App. Last frame of the "Clear Day Climb" scenario.
 
 Once the go button is pressed in the bottom right, the A* algorithm begins, cycling through timesteps until the target node is reached. Note that the higher-level program has been optimised to only call A* if the optimal path is suddenly obstructed, otherwise the drone will proceed to the next node.
 
-# The A* Algorithm
+# The Algorithm
 
-Various path-finding algorithms were initially researched that could potentially scale well with grid size, such as Potential Field, Floyd-Warshall, Genetic Algorithm, and A* (see report.pdf, page 12).
+Various path-finding algorithms were initially researched that could potentially scale well with grid size, such as Potential Field, Floyd-Warshall, Genetic Algorithm, and A*. I noted the following, and concluded that A* was best suited for this application:
+
+| **Potential Field**                                                                                                                                                                              | **Floyd-Warshall**                                      | **Genetic Algorithm**                                               | **_A<b>*</b> Algorithm_**                                  |
+|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------|
+| Artificial Potential field assigned to every point in the world                                                                                                                                  | Subset of Dynamic Programming                           | Evolutionary algorithm inspired by the process of natural selection | “Estimated cost to target” is a heuristic         |
+| Goal node has lowest potential and starting node has highest potential, obstacles and no-fly-zones also having high potential, so the UAV is pulled towards goal whilst obstacles push UAV away. | Finds shortest path between all pairs of vertices       | Does not scale well with complexity                                 | Popular in games such as Pacman and Tower defense |
+| Poor optimization in narrow passages, dynamic environments, and symmetrical obstacles                                                                                                            | Improvement upon Dijkstra’s and Bellman-Ford algorithms |                                                                     | Relies heavily on heuristics                      |
+
+
 The way the A* algorithm theory is applied here is best explained in the following two flow charts from my report, one which details the static version of the algorithm, and the other which covers the dynamic version. It is broken down across several pages in the report, pages 14-19.
 <p align="center">
 <img width="264" alt="image" src="https://github.com/frostyrez/Drone-Astar/assets/123249055/5d8c2504-cefd-4ae5-a5c2-626fd99e8127">
