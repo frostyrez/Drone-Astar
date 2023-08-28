@@ -15,6 +15,8 @@ Dynamic A* Quadcopter App. Last frame of the "Clear Day Climb" scenario.
 
 Once the go button is pressed in the bottom right, the A* algorithm begins, cycling through timesteps until the target node is reached. Note that the higher-level program has been optimised to only call A* if the optimal path is suddenly obstructed, otherwise the drone will proceed to the next node.
 
+Feel free to download and play with the .mlapp. Additional MATLAB toolboxes may be required.
+
 # The Algorithm
 
 Various path-finding algorithms were initially researched that could potentially scale well with grid size, such as Potential Field, Floyd-Warshall, Genetic Algorithm, and A*. I noted the following, and concluded that A* was best suited for this application:
