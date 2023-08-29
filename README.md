@@ -15,7 +15,7 @@ This project resulted in the creation of a MATLAB app as shown below. The front-
 
 Once the go button is pressed in the bottom right, the A* algorithm begins, cycling through timesteps until the target node is reached. Note that the higher-level program has been optimised to only call A* if the optimal path is suddenly obstructed, otherwise the drone will proceed to the next node.
 
-Feel free to download and play with the .mlapp. Additional MATLAB toolboxes may need to be installed.
+Feel free to download and play with `AStarApp.mlapp`. Additional MATLAB toolboxes may need to be installed.
 
 ## The Algorithm
 
