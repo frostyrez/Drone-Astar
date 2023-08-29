@@ -4,22 +4,22 @@
 
 A similarly important problem facing the widespread adoption of drones in urban areas, in addition to the robust autonomous controller discussed in the FYP directory, is the drone's ability to navigate a constantly changing urban environment, full of static and dynamic obstacles.
 
-This project resulted in the creation of a MATLAB app as shown below. The front-end code was written in MATLAB's App Designer software, and allows the user to either choose from a selection of pre-defined urban environments or to create an entirely novel situation for the quadcopter to navigate. Once start and target coordinates are inputted, the user can choose how many fixed obstacles (buildings) and moving obstacles (other aircraft) will be included in the simulation. The buildings are modelled as cylinders where height, radius, and (x,y) center position are requested. The moving obstacles are defined as (x,y) center positon, radius, and height above ground. A direction is then selected for all moving obstacles to move in.
+This project resulted in the creation of a MATLAB app as shown below. The front-end code was written in MATLAB's App Designer software, and allows the user to either choose from a selection of pre-defined urban environments or to create an entirely novel situation for the quadcopter to navigate. Once start and target coordinates are inputted, the user can choose how many fixed obstacles (buildings) and moving obstacles (other aircraft) will be included in the simulation. The buildings are modelled as cylinders where height, radius, and (x,y) center position are inputted. The moving obstacles are defined as (x,y) center positon, radius, and height above ground. A direction is then selected for all moving obstacles.
 
 <p align="center">
 <img width="494" alt="image" src="https://github.com/frostyrez/Drone-Astar/assets/123249055/f970a4bf-42cd-444d-b0da-299b4f4281f7">
 </p>
 <p align="center">
-Dynamic A* Quadcopter App. Last frame of the "Clear Day Climb" scenario.
+<i> Dynamic A* Quadcopter App. Last frame of the "Clear Day Climb" scenario. </i>
 </p>
 
 Once the go button is pressed in the bottom right, the A* algorithm begins, cycling through timesteps until the target node is reached. Note that the higher-level program has been optimised to only call A* if the optimal path is suddenly obstructed, otherwise the drone will proceed to the next node.
 
-Feel free to download and play with the .mlapp. Additional MATLAB toolboxes may be required.
+Feel free to download and play with the .mlapp. Additional MATLAB toolboxes may need to be installed.
 
-# The Algorithm
+## The Algorithm
 
-Various path-finding algorithms were initially researched that could potentially scale well with grid size, such as Potential Field, Floyd-Warshall, Genetic Algorithm, and A*. I noted the following, and concluded that A* was best suited for this application:
+Popular path-finding algorithms were initially researched such as Potential Field, Floyd-Warshall, Genetic Algorithm, and A*. I noted the following traits, and concluded that A* was best suited for this application:
 
 | **Potential Field**                                                                                                                                                                              | **Floyd-Warshall**                                      | **Genetic Algorithm**                                               | **_A<b>*</b> Algorithm_**                                  |
 |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------|---------------------------------------------------------------------|---------------------------------------------------|
@@ -28,15 +28,25 @@ Various path-finding algorithms were initially researched that could potentially
 | Poor optimization in narrow passages, dynamic environments, and symmetrical obstacles                                                                                                            | Improvement upon Dijkstra’s and Bellman-Ford algorithms |                                                                     | Relies heavily on heuristics                      |
 
 
-The way the A* algorithm theory is applied here is best explained in the following two flow charts from my report, one which details the static version of the algorithm, and the other which covers the dynamic version. It is broken down across several pages in the report, pages 14-19.
+The way A* is applied here is best explained in the following two flow charts from my report, one which details the static version of the algorithm, and the other which covers the dynamic version. They are more readable in my report where they have been spread across pages 14-19.
 <p align="center">
 <img width="264" alt="image" src="https://github.com/frostyrez/Drone-Astar/assets/123249055/5d8c2504-cefd-4ae5-a5c2-626fd99e8127">
 </p>
 <p align="center">
-A* Flow Charts
+<i> A* Flow Charts </i>
 </p>
 
-Because the time complexity of the path-finding algorithm can vary between simulations depending on the efficiency of the heuristic in that given state space, an effort was made to estimate the time complexity by recording the increase in computational time as the state space scaled up from a 10x10 array to a 50x50x50 state space. The version history is displayed below, with time to execute and the factor change from the previous version. Note the 221-fold increase in computational time from the 125-fold increase map size, from 1000 cells to 125000.
+### Time Complexity and Optimisations
+
+Because the time complexity of the path-finding algorithm can vary between simulations depending on the efficiency of the heuristic in that given state space, an effort was made to estimate the time complexity by recording the increase in computational time as the state space scaled up from 10x10 to 50x50x50. Other features and optimisations also had their impact on computational time recorded. A few conclusions:
+
+- Version 5: Increasing the map size by 125 times led to a 221-fold increase in computational time.
+- Version 6: Only calling A* when the optimal path is no longer available cut computational time by roughly half.
+- Versions 7 and 8: Reducing the number of directions the drone can travel in successively cut computational time by 31% and 62%.
+
+<p align="center">
+<i> Version History </i>
+</p>
 
 | **Version** | **Category** | **Improvement**                                                 | **Time to execute (s)** | **Factor** |
 |-------------|--------------|-----------------------------------------------------------------|-------------------------|------------|
