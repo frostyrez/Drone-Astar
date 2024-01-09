@@ -2,9 +2,9 @@
 
 ## The Project
 
-A similarly important problem facing the widespread adoption of drones in urban areas, in addition to the robust autonomous controller discussed in the FYP directory, is the drone's ability to navigate a constantly changing urban environment, full of static and dynamic obstacles.
+A crucial obstacle standing in the way of widespread commercial use of drones in urban areas is it's struggling ability to autonomously navigate and adapt to a constantly changing urban environment, full of static and dynamic hazards. Regulatory frameworks are stringent, rightfully so, and proving that a drone is able to safely navigate an urban environment is a complex engineering task.
 
-This project resulted in the creation of a MATLAB app as shown below. The front-end code was written in MATLAB's App Designer software, and allows the user to either choose from a selection of pre-defined urban environments or to create an entirely novel situation for the quadcopter to navigate. Once start and target coordinates are inputted, the user can choose how many fixed obstacles (buildings) and moving obstacles (other aircraft) will be included in the simulation. The buildings are modelled as cylinders where height, radius, and (x,y) center position are inputted. The moving obstacles are defined as (x,y) center positon, radius, and height above ground. A direction is then selected for all moving obstacles.
+In this project, a quadcopter controller is built up from first principles using MPC theory to ensure it is fully autonomous and robust. The controller is then packaged up into a GUI using MATLAB App Designer. The app allows the user to either choose from a selection of pre-defined urban environments or to create an entirely novel situation for the quadcopter to navigate. Once start and target coordinates are inputted, the user can choose how many fixed obstacles (buildings) and moving obstacles (other aircraft) will be included in the simulation. The buildings are modelled as cylinders where height, radius, and (x,y) center position are inputted. The moving obstacles are defined as (x,y) center positon, radius, and height above ground. A direction is then selected for all moving obstacles.
 
 <p align="center">
 <img width="494" alt="image" src="https://github.com/frostyrez/Drone-Astar/assets/123249055/f970a4bf-42cd-444d-b0da-299b4f4281f7">
